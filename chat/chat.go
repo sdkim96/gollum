@@ -2,9 +2,13 @@ package chat
 
 import "context"
 
+type Creator interface {
+	Create(ctx context.Context, params *Params) (*Response, error)
+}
+
 func Create(
 	ctx context.Context,
-	model Model,
+	cr Creator,
 	prompt string,
 	options ...OptionFunc,
 ) (*Response, error) {
@@ -13,5 +17,5 @@ func Create(
 	for _, o := range options {
 		o(params)
 	}
-	return model.Create(ctx, params)
+	return cr.Create(ctx, params)
 }

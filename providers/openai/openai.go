@@ -1,29 +1,26 @@
 package openai
 
-import "net/http"
+import (
+	"context"
 
-const openAIBaseURL = "https://api.openai.com/v1"
+	"github.com/sdkim96/gollum/chat"
+)
 
-type Client struct {
-	apiKey     string
-	httpClient *http.Client
+type GollumOpenAI struct {
+	c *Client
 }
 
-type ClientOptionFunc func(*Client)
-
-func NewClient(apiKey string, opts ...ClientOptionFunc) *Client {
-	client := &Client{
-		apiKey:     apiKey,
-		httpClient: http.DefaultClient,
+func NewGollumOpenAI(client *Client) *GollumOpenAI {
+	return &GollumOpenAI{
+		c: client,
 	}
-	for _, opt := range opts {
-		opt(client)
-	}
-	return client
 }
 
-func WithHTTPClient(c *http.Client) ClientOptionFunc {
-	return func(client *Client) {
-		client.httpClient = c
+func (g *GollumOpenAI) Create(ctx context.Context, params *chat.Params) (*chat.Response, error) {
+	openAIParams := convertGollumParams(params)
+	openaiResp, err := g.c.Responses.Create(ctx, openAIParams)
+	if err != nil {
+		return nil, err
 	}
+	return convertOpenAIResponse(openaiResp), nil
 }
