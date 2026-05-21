@@ -1,24 +1,101 @@
 package openai
 
-import "github.com/sdkim96/gollum/chat"
+import (
+	"encoding/json"
+)
 
-type ResponsesParams struct {
-	Model        string             `json:"model"`
-	Instructions *string            `json:"instructions,omitempty"`
-	Input        []ResponsesMessage `json:"input"`
+// responsesParams is the request body for POST /v1/responses.
+// gollum users work with chat.Params; this type is populated by the converter.
+type responsesParams struct {
+	Model string               `json:"model"`
+	Input []responsesInputItem `json:"input"`
+
+	Instructions    *string  `json:"instructions,omitempty"`
+	MaxOutputTokens *int     `json:"max_output_tokens,omitempty"`
+	Temperature     *float64 `json:"temperature,omitempty"`
+
+	Tools             []responsesTool              `json:"tools,omitempty"`
+	ToolChoice        *responsesToolChoiceSpecific `json:"tool_choice,omitempty"`
+	ParallelToolCalls *bool                        `json:"parallel_tool_calls,omitempty"`
+
+	Stream bool `json:"stream,omitempty"`
 }
 
-type ResponsesMessage struct {
-	Role    string          `json:"role"`
-	Content []ResponsesPart `json:"content"`
+// responsesInputItem is an element of the input array (a union).
+// Field usage depends on Type. Always construct via the helpers below.
+//   - "message"              → Role + Content
+//   - "function_call_output" → CallID + Output
+type responsesInputItem struct {
+	Type string `json:"type,omitempty"`
+
+	// for message
+	Role    string          `json:"role,omitempty"` // "user" | "assistant"
+	Content []responsesPart `json:"content,omitempty"`
+
+	// for function_call_output
+	CallID string `json:"call_id,omitempty"`
+	Output string `json:"output,omitempty"`
 }
 
-type ResponsesPart struct {
-	Type     string  `json:"type"`
-	Text     *string `json:"text,omitempty"`
-	ImageURL *string `json:"image_url,omitempty"`
+func newUserMessage(content []responsesPart) responsesInputItem {
+	return responsesInputItem{
+		Type:    "message",
+		Role:    "user",
+		Content: content,
+	}
 }
 
-func convertGollumParams(params *chat.Params) *ResponsesParams {
-	return &ResponsesParams{}
+func newAssistantMessage(content []responsesPart) responsesInputItem {
+	return responsesInputItem{
+		Type:    "message",
+		Role:    "assistant",
+		Content: content,
+	}
+}
+
+func newFunctionCallOutput(callID, output string) responsesInputItem {
+	return responsesInputItem{
+		Type:   "function_call_output",
+		CallID: callID,
+		Output: output,
+	}
+}
+
+// responsesPart is a content element inside a message.
+// Field usage depends on Type.
+//   - "input_text"  → Text                    (user message)
+//   - "output_text" → Text                    (assistant message, for stateless multi-turn)
+//   - "input_image" → ImageURL (+ Detail)     (user message)
+type responsesPart struct {
+	Type     string `json:"type"`
+	Text     string `json:"text,omitempty"`
+	ImageURL string `json:"image_url,omitempty"`
+	Detail   string `json:"detail,omitempty"` // "low" | "high" | "auto"
+}
+
+func newInputTextPart(text string) responsesPart {
+	return responsesPart{Type: "input_text", Text: text}
+}
+
+func newOutputTextPart(text string) responsesPart {
+	return responsesPart{Type: "output_text", Text: text}
+}
+
+func newInputImagePart(url string) responsesPart {
+	return responsesPart{Type: "input_image", ImageURL: url}
+}
+
+// responsesTool defines a function tool.
+type responsesTool struct {
+	Type        string          `json:"type"` // "function"
+	Name        string          `json:"name"`
+	Description *string         `json:"description,omitempty"`
+	Parameters  json.RawMessage `json:"parameters"`
+	Strict      *bool           `json:"strict,omitempty"`
+}
+
+// responsesToolChoiceSpecific forces a specific tool call.
+type responsesToolChoiceSpecific struct {
+	Type string `json:"type"` // "function"
+	Name string `json:"name"`
 }
