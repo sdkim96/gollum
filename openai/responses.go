@@ -9,7 +9,7 @@ import (
 	"net/http"
 
 	"github.com/sdkim96/gollum/internal"
-	oai "github.com/sdkim96/gollum/providers/openai/internal"
+	oai "github.com/sdkim96/gollum/openai/internal"
 )
 
 type ResponsesService struct {

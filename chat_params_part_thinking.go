@@ -1,11 +1,11 @@
-package part
+package gollum
 
 type ThinkingPart struct {
 	Content string
 }
 
 func (t ThinkingPart) Type() string {
-	return "thinking"
+	return PartTypeThinking
 }
 
 func NewThinkingPart(content string) ThinkingPart {

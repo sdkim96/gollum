@@ -1,4 +1,4 @@
-package part
+package gollum
 
 type ToolResultPart struct {
 	ToolUseID string
@@ -6,7 +6,7 @@ type ToolResultPart struct {
 }
 
 func (t ToolResultPart) Type() string {
-	return "toolResult"
+	return PartTypeToolResult
 }
 
 func NewToolResultPart(toolUseID, content string) ToolResultPart {

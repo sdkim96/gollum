@@ -1,6 +1,6 @@
 package openai
 
-import "github.com/sdkim96/gollum/chat"
+import "github.com/sdkim96/gollum"
 
 // responsesResponse is the body returned by POST /v1/responses.
 // Converted to chat.Response via toChatResponse; never exposed to users.
@@ -84,6 +84,6 @@ type responsesError struct {
 	Param   string `json:"param,omitempty"`
 }
 
-func toChatResponse(resp *responsesResponse) *chat.Response {
-	return &chat.Response{}
+func toChatResponse(resp *responsesResponse) *gollum.ChatResponse {
+	return &gollum.ChatResponse{}
 }

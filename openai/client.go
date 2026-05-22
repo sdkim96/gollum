@@ -7,19 +7,6 @@ import (
 	"sync"
 )
 
-const (
-	Version = "v0.1.0"
-
-	headerContentType   = "Content-Type"
-	headerAuthorization = "Authorization"
-	headerUserAgent     = "User-Agent"
-
-	defaultBaseURL   = "https://api.openai.com/v1"
-	defaultUserAgent = "gollum/openai" + "/" + Version
-
-	mediaTypeJSON = "application/json"
-)
-
 type Client struct {
 
 	// HTTP client used to communicate with the OpenAI API.

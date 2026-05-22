@@ -1,23 +1,23 @@
-package gollum
+package examples
 
 import (
 	"context"
 	"iter"
 
-	"github.com/sdkim96/gollum/chat"
-	"github.com/sdkim96/gollum/providers/openai"
+	"github.com/sdkim96/gollum"
+	"github.com/sdkim96/gollum/openai"
 )
 
 func main() {
 
 	client := openai.NewClient(nil)
-	gollumOpenAI := openai.NewGollumOpenAI(client)
-	chat.Create(
+	gollum.Create(
 		context.Background(),
-		gollumOpenAI,
+		client,
+		"gpt-3.5-turbo",
 		"Write a poem about gollum",
-		chat.WithInstruction("You are a helpful assistant."),
-		chat.WithTemperature(0.7),
+		gollum.WithInstruction("You are a helpful assistant."),
+		gollum.WithTemperature(0.7),
 	)
 	embed.Create(context.Background(), textEmbedding3Small, "Generate an embedding for the given text.")
 }
