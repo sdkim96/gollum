@@ -33,32 +33,8 @@ type responsesInputItem struct {
 	Content []responsesPart `json:"content,omitempty"`
 
 	// for function_call_output
-	CallID string `json:"call_id,omitempty"`
-	Output string `json:"output,omitempty"`
-}
-
-func newUserMessage(content []responsesPart) responsesInputItem {
-	return responsesInputItem{
-		Type:    "message",
-		Role:    "user",
-		Content: content,
-	}
-}
-
-func newAssistantMessage(content []responsesPart) responsesInputItem {
-	return responsesInputItem{
-		Type:    "message",
-		Role:    "assistant",
-		Content: content,
-	}
-}
-
-func newFunctionCallOutput(callID, output string) responsesInputItem {
-	return responsesInputItem{
-		Type:   "function_call_output",
-		CallID: callID,
-		Output: output,
-	}
+	CallID *string `json:"call_id,omitempty"`
+	Output *string `json:"output,omitempty"`
 }
 
 // responsesPart is a content element inside a message.
@@ -67,22 +43,10 @@ func newFunctionCallOutput(callID, output string) responsesInputItem {
 //   - "output_text" → Text                    (assistant message, for stateless multi-turn)
 //   - "input_image" → ImageURL (+ Detail)     (user message)
 type responsesPart struct {
-	Type     string `json:"type"`
-	Text     string `json:"text,omitempty"`
-	ImageURL string `json:"image_url,omitempty"`
-	Detail   string `json:"detail,omitempty"` // "low" | "high" | "auto"
-}
-
-func newInputTextPart(text string) responsesPart {
-	return responsesPart{Type: "input_text", Text: text}
-}
-
-func newOutputTextPart(text string) responsesPart {
-	return responsesPart{Type: "output_text", Text: text}
-}
-
-func newInputImagePart(url string) responsesPart {
-	return responsesPart{Type: "input_image", ImageURL: url}
+	Type     string  `json:"type"`
+	Text     *string `json:"text,omitempty"`
+	ImageURL *string `json:"image_url,omitempty"`
+	Detail   *string `json:"detail,omitempty"` // "low" | "high" | "auto"
 }
 
 // responsesTool defines a function tool.
