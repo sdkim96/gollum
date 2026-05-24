@@ -1,6 +1,7 @@
 package openai
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/sdkim96/gollum"
@@ -126,4 +127,47 @@ func toResponsesToolChoice(tc *gollum.ToolChoice) *responsesToolChoiceSpecific {
 		Type: "function",
 		Name: tc.Name,
 	}
+}
+
+func toChatResponse(resp *responsesResponse) *gollum.ChatResponse {
+	var parts []gollum.Part
+
+	for _, item := range resp.Output {
+		switch item.Type {
+		case "message":
+			for _, c := range item.Content {
+				switch c.Type {
+				case "output_text":
+					parts = append(parts, gollum.NewTextPart(c.Text))
+				}
+			}
+		case "function_call":
+			parts = append(parts, gollum.NewToolUsePart(item.CallID, item.Name, parseArgs(item.Arguments)))
+		}
+	}
+
+	var usage gollum.ChatUsage
+	if resp.Usage != nil {
+		usage = gollum.ChatUsage{
+			InputTokens:  resp.Usage.InputTokens,
+			OutputTokens: resp.Usage.OutputTokens,
+			TotalTokens:  resp.Usage.TotalTokens,
+		}
+	}
+
+	return &gollum.ChatResponse{
+		Message:    gollum.NewModelMessage(parts),
+		Usage:      usage,
+		StopReason: resp.Status,
+		Model:      resp.Model,
+	}
+}
+
+func parseArgs(raw string) map[string]any {
+	if raw == "" {
+		return nil
+	}
+	var m map[string]any
+	json.Unmarshal([]byte(raw), &m)
+	return m
 }

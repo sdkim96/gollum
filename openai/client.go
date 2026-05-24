@@ -50,6 +50,26 @@ func (c *Client) WithAPIKey(apiKey string) *Client {
 	return c2
 }
 
+func (c *Client) WithHooks(bef func(req *http.Request), after func(req *http.Request, resp *http.Response, err error)) *Client {
+	c2 := c.copy()
+	defer c2.initialize()
+	c2transport := c2.client.Transport
+	if c2transport == nil {
+		c2transport = http.DefaultTransport
+	}
+
+	c2.client.Transport = roundTripperFunc(
+		func(req *http.Request) (*http.Response, error) {
+			req = req.Clone(req.Context())
+			bef(req)
+			resp, err := c2transport.RoundTrip(req)
+			after(req, resp, err)
+			return resp, err
+		},
+	)
+	return c2
+}
+
 // initialize guarantees default values and the services for the Client struct.
 func (c *Client) initialize() {
 	if c.BaseURL == nil {

@@ -17,21 +17,24 @@ type ResponsesService struct {
 }
 
 func (s *ResponsesService) create(ctx context.Context, params *responsesParams) (*responsesResponse, error) {
+	url := fmt.Sprintf("%s/responses", s.c.BaseURL.String())
 	data, err := json.Marshal(params)
 	if err != nil {
 		return nil, err
 	}
-	rawReq, err := http.NewRequestWithContext(ctx, "POST", fmt.Sprintf("%s/responses", s.c.BaseURL.Host), bytes.NewReader(data))
+	req, err := http.NewRequestWithContext(ctx, "POST", url, bytes.NewReader(data))
 	if err != nil {
 		return nil, err
 	}
-	rawResp, err := s.c.client.Do(rawReq)
+
+	rawResp, err := s.c.client.Do(req)
 	if err != nil {
 		return nil, err
 	}
 	defer rawResp.Body.Close()
 
 	var resp responsesResponse
+
 	err = json.NewDecoder(rawResp.Body).Decode(&resp)
 	if err != nil {
 		return nil, err
@@ -41,17 +44,19 @@ func (s *ResponsesService) create(ctx context.Context, params *responsesParams) 
 
 func (s *ResponsesService) stream(ctx context.Context, params *responsesParams) iter.Seq2[*responsesResponse, error] {
 	return func(yield func(*responsesResponse, error) bool) {
+		url := fmt.Sprintf("%s/responses", s.c.BaseURL.String())
 		data, err := json.Marshal(params)
 		if err != nil {
 			yield(nil, err)
 			return
 		}
-		rawReq, err := http.NewRequestWithContext(ctx, "POST", fmt.Sprintf("%s/responses", s.c.BaseURL.Host), bytes.NewReader(data))
+		req, err := http.NewRequestWithContext(ctx, "POST", url, bytes.NewReader(data))
 		if err != nil {
 			yield(nil, err)
 			return
 		}
-		rawResp, err := s.c.client.Do(rawReq)
+
+		rawResp, err := s.c.client.Do(req)
 		if err != nil {
 			yield(nil, err)
 			return

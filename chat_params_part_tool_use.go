@@ -10,6 +10,10 @@ func (t ToolUsePart) Type() string {
 	return PartTypeToolUse
 }
 
+func (t ToolUsePart) Text() string {
+	return ""
+}
+
 func NewToolUsePart(toolUseID, toolName string, args map[string]any) ToolUsePart {
 	return ToolUsePart{
 		ToolUseID: toolUseID,

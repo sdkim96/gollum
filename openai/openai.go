@@ -34,9 +34,7 @@ func (c *Client) Create(ctx context.Context, gp *gollum.ChatParams) (*gollum.Cha
 	if err := inspectModel(gp.Model); err != nil {
 		return nil, err
 	}
-
-	p := toResponsesParams(gp, false)
-	resp, err := c.Responses.create(ctx, p)
+	resp, err := c.Responses.create(ctx, toResponsesParams(gp, false))
 	if err != nil {
 		return nil, err
 	}
@@ -49,14 +47,14 @@ func (c *Client) Stream(ctx context.Context, gp *gollum.ChatParams) iter.Seq2[*g
 			yield(nil, err)
 			return
 		}
-		openAIParams := toResponsesParams(gp, true)
-		for openaiResp := range c.Responses.stream(ctx, openAIParams) {
-			if openaiResp.Err != nil {
-				yield(nil, openaiResp.Err)
-				return
-			}
-			yield(toChatResponse(openaiResp.Value), nil)
-		}
+		_ = toResponsesParams(gp, true)
+		// for openaiResp := range c.Responses.stream(ctx, openAIParams) {
+		// 	if openaiResp.Err != nil {
+		// 		yield(nil, openaiResp.Err)
+		// 		return
+		// 	}
+		// 	yield(toChatResponse(openaiResp.Value), nil)
+		// }
 	}
 }
 
