@@ -47,14 +47,22 @@ func (c *Client) Stream(ctx context.Context, gp *gollum.ChatParams) iter.Seq2[*g
 			yield(nil, err)
 			return
 		}
-		_ = toResponsesParams(gp, true)
-		// for openaiResp := range c.Responses.stream(ctx, openAIParams) {
-		// 	if openaiResp.Err != nil {
-		// 		yield(nil, openaiResp.Err)
-		// 		return
-		// 	}
-		// 	yield(toChatResponse(openaiResp.Value), nil)
-		// }
+		for ev, err := range c.Responses.stream(ctx, toResponsesParams(gp, true)) {
+			if err != nil {
+				yield(nil, err)
+				return
+			}
+			resp, err := toStreamChatResponse(ev)
+			if err != nil {
+				yield(nil, err)
+				return
+			}
+			if resp != nil {
+				if !yield(resp, nil) {
+					return
+				}
+			}
+		}
 	}
 }
 

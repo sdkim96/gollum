@@ -22,8 +22,19 @@ func toResponsesParams(p *gollum.ChatParams, stream bool) *responsesParams {
 		Temperature:     p.Temperature,
 		Tools:           toResponsesTools(p.Tools),
 		ToolChoice:      toResponsesToolChoice(p.ToolChoice),
+		Reasoning:       toResponsesReasoning(p.Thinking),
 		Stream:          stream,
 	}
+}
+
+func toResponsesReasoning(t *gollum.Thinking) *responsesReasoning {
+	if t == nil {
+		return nil
+	}
+	return &responsesReasoning{
+		Effort: t.Effort,
+	}
+
 }
 
 func toInputItems(m gollum.Message) []responsesInputItem {
@@ -170,4 +181,49 @@ func parseArgs(raw string) map[string]any {
 	var m map[string]any
 	json.Unmarshal([]byte(raw), &m)
 	return m
+}
+
+// toStreamChatResponse converts a single SSE event into a ChatResponse.
+// Returns (nil, nil) for events that don't produce a ChatResponse.
+// Returns (nil, error) for error events.
+func toStreamChatResponse(ev *responsesStreamEvent) (*gollum.ChatResponse, error) {
+	switch ev.Type {
+	case eventOutputTextDelta:
+		return &gollum.ChatResponse{
+			Message: gollum.NewModelMessage([]gollum.Part{
+				gollum.NewTextPart(ev.Delta),
+			}),
+		}, nil
+
+	case eventFunctionCallArgsDone:
+		if ev.Item == nil {
+			return nil, nil
+		}
+		return &gollum.ChatResponse{
+			Message: gollum.NewModelMessage([]gollum.Part{
+				gollum.NewToolUsePart(ev.Item.CallID, ev.Item.Name, parseArgs(ev.Item.Arguments)),
+			}),
+		}, nil
+
+	case eventResponseCompleted:
+		if ev.Response == nil {
+			return nil, nil
+		}
+		return toChatResponse(ev.Response), nil
+
+	case eventResponseFailed:
+		if ev.Response != nil && ev.Response.Error != nil {
+			return nil, fmt.Errorf("openai: %s: %s", ev.Response.Error.Code, ev.Response.Error.Message)
+		}
+		return nil, fmt.Errorf("openai: response failed")
+
+	case eventError:
+		if ev.Error != nil {
+			return nil, fmt.Errorf("openai: %s: %s", ev.Error.Code, ev.Error.Message)
+		}
+		return nil, fmt.Errorf("openai: stream error")
+
+	default:
+		return nil, nil
+	}
 }

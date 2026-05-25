@@ -14,6 +14,8 @@ type ChatParams struct {
 
 	Tools      []Tool      `json:"tools,omitempty"`
 	ToolChoice *ToolChoice `json:"tool_choice,omitempty"`
+
+	Thinking *Thinking `json:"thinking,omitempty"`
 }
 
 type Tool struct {
@@ -25,4 +27,20 @@ type Tool struct {
 type ToolChoice struct {
 	Type string `json:"type"` // "auto" | "required" | "none" | "function"
 	Name string `json:"name,omitempty"`
+}
+
+// Thinking represents the thinking configuration.
+// Each field is optional and may be used to guide the model's reasoning process.
+//
+// OpenAI models (e.g., gpt-5o-nano) may use the Effort field,
+// while Anthropic models (e.g., claude-2) may use the Budget field.
+//
+// The other field that the vendor does not use will be ignored.
+type Thinking struct {
+
+	// Budget field is valid for Anthropic and Google models.
+	Budget *int `json:"budget,omitempty"`
+
+	// Effort field is valid for OpenAI models.
+	Effort *string `json:"effort,omitempty"` // "low" | "medium" | "high"
 }

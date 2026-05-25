@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"testing"
+	"time"
 
 	"github.com/sdkim96/gollum"
 )
@@ -21,6 +22,11 @@ func loadTestData(t *testing.T, name string) []byte {
 	return data
 }
 
+func Timeout120Seconds() (context.Context, context.CancelFunc) {
+	ctx, cancel := context.WithTimeout(context.Background(), 120*time.Second)
+	return ctx, cancel
+}
+
 func realOpenAIClient() *Client {
 	apiKey := os.Getenv("OPENAI_API_KEY")
 	return NewClient(nil).
@@ -32,7 +38,7 @@ func realOpenAIClient() *Client {
 			resp.Body.Close()
 			resp.Body = io.NopCloser(bytes.NewBuffer(d))
 
-			os.WriteFile("req.json", d, 0644)
+			os.WriteFile("response.json", d, 0644)
 			fmt.Printf("Request Ends")
 		})
 }
@@ -80,10 +86,31 @@ func newMultiturnChatParams() *gollum.ChatParams {
 		Model:    "gpt-4o-mini",
 		Messages: messages,
 	}
+}
 
+func newThinkingChatParams() *gollum.ChatParams {
+
+	var messages []gollum.Message
+	var parts []gollum.Part
+
+	parts = append(parts, gollum.NewTextPart("I'm Gollum, the precious seeker. Make a deep investigation about how to find the One Ring."))
+	messages = append(messages, gollum.NewUserMessage(parts))
+
+	return &gollum.ChatParams{
+		Model:    "gpt-5-nano",
+		Messages: messages,
+	}
 }
 
 func TestResponsesCreate(t *testing.T) {
 	c := realOpenAIClient()
-	c.Create(context.Background(), newMultiturnChatParams())
+	params := newThinkingChatParams()
+	ctx, cancel := Timeout120Seconds()
+	defer cancel()
+	for d, err := range c.Stream(ctx, params) {
+		fmt.Print("Received chunk: ", d)
+		if err != nil {
+			t.Fatal(err)
+		}
+	}
 }

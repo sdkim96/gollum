@@ -1,0 +1,150 @@
+event: response.created
+data: {"type":"response.created","response":{"id":"resp_0c1df58f5cfda06a006a13c2b0f74c819888a526fb9533f44a","object":"response","created_at":1779679920,"status":"in_progress","background":false,"completed_at":null,"error":null,"frequency_penalty":0.0,"incomplete_details":null,"instructions":null,"max_output_tokens":null,"max_tool_calls":null,"model":"gpt-4o-mini-2024-07-18","moderation":null,"output":[],"parallel_tool_calls":true,"presence_penalty":0.0,"previous_response_id":null,"prompt_cache_key":null,"prompt_cache_retention":"in_memory","reasoning":{"context":null,"effort":null,"summary":null},"safety_identifier":null,"service_tier":"auto","store":true,"temperature":1.0,"text":{"format":{"type":"text"},"verbosity":"medium"},"tool_choice":"auto","tools":[],"top_logprobs":0,"top_p":1.0,"truncation":"disabled","usage":null,"user":null,"metadata":{}},"sequence_number":0}
+
+event: response.in_progress
+data: {"type":"response.in_progress","response":{"id":"resp_0c1df58f5cfda06a006a13c2b0f74c819888a526fb9533f44a","object":"response","created_at":1779679920,"status":"in_progress","background":false,"completed_at":null,"error":null,"frequency_penalty":0.0,"incomplete_details":null,"instructions":null,"max_output_tokens":null,"max_tool_calls":null,"model":"gpt-4o-mini-2024-07-18","moderation":null,"output":[],"parallel_tool_calls":true,"presence_penalty":0.0,"previous_response_id":null,"prompt_cache_key":null,"prompt_cache_retention":"in_memory","reasoning":{"context":null,"effort":null,"summary":null},"safety_identifier":null,"service_tier":"auto","store":true,"temperature":1.0,"text":{"format":{"type":"text"},"verbosity":"medium"},"tool_choice":"auto","tools":[],"top_logprobs":0,"top_p":1.0,"truncation":"disabled","usage":null,"user":null,"metadata":{}},"sequence_number":1}
+
+event: response.output_item.added
+data: {"type":"response.output_item.added","item":{"id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","type":"message","status":"in_progress","content":[],"role":"assistant"},"output_index":0,"sequence_number":2}
+
+event: response.content_part.added
+data: {"type":"response.content_part.added","content_index":0,"item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","output_index":0,"part":{"type":"output_text","annotations":[],"logprobs":[],"text":""},"sequence_number":3}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":"Ah","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"ZudxFxYMfkHSqf","output_index":0,"sequence_number":4}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":",","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"rvmQ4UaXVgckf5h","output_index":0,"sequence_number":5}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" the","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"Xoiyr3uds6Xe","output_index":0,"sequence_number":6}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" One","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"SoE5irgSWGV1","output_index":0,"sequence_number":7}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" Ring","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"GSWtJ2Rv5LU","output_index":0,"sequence_number":8}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":"!","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"4kiiFqapet38TUB","output_index":0,"sequence_number":9}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" It's","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"O2ckhf0pa9b","output_index":0,"sequence_number":10}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" a","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"nPDi4L6XJ9dHDG","output_index":0,"sequence_number":11}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" powerful","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"f9Uvoau","output_index":0,"sequence_number":12}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" and","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"3tysMqOk6Wrf","output_index":0,"sequence_number":13}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" elusive","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"BKOJh9OO","output_index":0,"sequence_number":14}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" treasure","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"grmxxVR","output_index":0,"sequence_number":15}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":".","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"P8WTbOjEs6hMRJs","output_index":0,"sequence_number":16}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" Last","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"l476Gvszqmm","output_index":0,"sequence_number":17}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" known","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"dHNIZ8NJjQ","output_index":0,"sequence_number":18}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" to","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"uVvO2YllydHav","output_index":0,"sequence_number":19}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" be","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"4Dha2cn3IBwtF","output_index":0,"sequence_number":20}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" in","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"2rrnS0z5yU42i","output_index":0,"sequence_number":21}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" the","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"w4TnmaXkC3Bf","output_index":0,"sequence_number":22}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" hands","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"jAoV4HLHAh","output_index":0,"sequence_number":23}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" of","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"yXd4NVf6QewpQ","output_index":0,"sequence_number":24}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" the","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"8iGMefCzXHtG","output_index":0,"sequence_number":25}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" hob","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"DoirU60kPvH6","output_index":0,"sequence_number":26}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":"bit","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"4w8wwlrjdwVxT","output_index":0,"sequence_number":27}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":",","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"bUD2OXEo2fbnCYj","output_index":0,"sequence_number":28}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" Fro","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"BFeeU4At64Fz","output_index":0,"sequence_number":29}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":"do","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"PsPjod5Q5F9BbP","output_index":0,"sequence_number":30}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" B","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"UPW9U3xYY3bljf","output_index":0,"sequence_number":31}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":"agg","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"1bUTmj8PRhJAJ","output_index":0,"sequence_number":32}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":"ins","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"TB7Ko7Epqf6dG","output_index":0,"sequence_number":33}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":".","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"i0w40b2UoRtfKkf","output_index":0,"sequence_number":34}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" Have","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"Lj2hE6JbUPT","output_index":0,"sequence_number":35}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" you","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"QSDmJU4v8Wo3","output_index":0,"sequence_number":36}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" tried","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"JpBXuK4Y5g","output_index":0,"sequence_number":37}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" searching","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"n12yDr","output_index":0,"sequence_number":38}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" for","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"FofQFB5ED1aK","output_index":0,"sequence_number":39}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" it","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"zKZiAU5EbkJga","output_index":0,"sequence_number":40}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" in","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"L6lfOK22Ck6nX","output_index":0,"sequence_number":41}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" the","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"ew8nDQNncKn8","output_index":0,"sequence_number":42}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":" Sh","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"umHuR5q2MaDSi","output_index":0,"sequence_number":43}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":"ire","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"RV4MtXNXdxnPi","output_index":0,"sequence_number":44}
+
+event: response.output_text.delta
+data: {"type":"response.output_text.delta","content_index":0,"delta":"?","item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"obfuscation":"DJW56yDA8roo2xF","output_index":0,"sequence_number":45}
+
+event: response.output_text.done
+data: {"type":"response.output_text.done","content_index":0,"item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","logprobs":[],"output_index":0,"sequence_number":46,"text":"Ah, the One Ring! It's a powerful and elusive treasure. Last known to be in the hands of the hobbit, Frodo Baggins. Have you tried searching for it in the Shire?"}
+
+event: response.content_part.done
+data: {"type":"response.content_part.done","content_index":0,"item_id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","output_index":0,"part":{"type":"output_text","annotations":[],"logprobs":[],"text":"Ah, the One Ring! It's a powerful and elusive treasure. Last known to be in the hands of the hobbit, Frodo Baggins. Have you tried searching for it in the Shire?"},"sequence_number":47}
+
+event: response.output_item.done
+data: {"type":"response.output_item.done","item":{"id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","type":"message","status":"completed","content":[{"type":"output_text","annotations":[],"logprobs":[],"text":"Ah, the One Ring! It's a powerful and elusive treasure. Last known to be in the hands of the hobbit, Frodo Baggins. Have you tried searching for it in the Shire?"}],"role":"assistant"},"output_index":0,"sequence_number":48}
+
+event: response.completed
+data: {"type":"response.completed","response":{"id":"resp_0c1df58f5cfda06a006a13c2b0f74c819888a526fb9533f44a","object":"response","created_at":1779679920,"status":"completed","background":false,"completed_at":1779679922,"error":null,"frequency_penalty":0.0,"incomplete_details":null,"instructions":null,"max_output_tokens":null,"max_tool_calls":null,"model":"gpt-4o-mini-2024-07-18","moderation":null,"output":[{"id":"msg_0c1df58f5cfda06a006a13c2b17a188198804d17f531588e9e","type":"message","status":"completed","content":[{"type":"output_text","annotations":[],"logprobs":[],"text":"Ah, the One Ring! It's a powerful and elusive treasure. Last known to be in the hands of the hobbit, Frodo Baggins. Have you tried searching for it in the Shire?"}],"role":"assistant"}],"parallel_tool_calls":true,"presence_penalty":0.0,"previous_response_id":null,"prompt_cache_key":null,"prompt_cache_retention":"in_memory","reasoning":{"context":null,"effort":null,"summary":null},"safety_identifier":null,"service_tier":"default","store":true,"temperature":1.0,"text":{"format":{"type":"text"},"verbosity":"medium"},"tool_choice":"auto","tools":[],"top_logprobs":0,"top_p":1.0,"truncation":"disabled","usage":{"input_tokens":49,"input_tokens_details":{"cached_tokens":0},"output_tokens":43,"output_tokens_details":{"reasoning_tokens":0},"total_tokens":92},"user":null,"metadata":{}},"sequence_number":49}
+

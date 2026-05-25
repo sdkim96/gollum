@@ -2,6 +2,7 @@ package internal
 
 import (
 	"bufio"
+	"encoding/json"
 	"strings"
 )
 
@@ -84,5 +85,5 @@ func ScanFunc(line string, dest ...any) {
 	}
 
 	*dest[0].(*string) = strings.TrimSpace(event.String())
-	*dest[1].(*string) = strings.TrimSpace(data.String())
+	json.Unmarshal([]byte(strings.TrimSpace(data.String())), dest[1])
 }

@@ -42,8 +42,8 @@ func (s *ResponsesService) create(ctx context.Context, params *responsesParams) 
 	return &resp, nil
 }
 
-func (s *ResponsesService) stream(ctx context.Context, params *responsesParams) iter.Seq2[*responsesResponse, error] {
-	return func(yield func(*responsesResponse, error) bool) {
+func (s *ResponsesService) stream(ctx context.Context, params *responsesParams) iter.Seq2[*responsesStreamEvent, error] {
+	return func(yield func(*responsesStreamEvent, error) bool) {
 		url := fmt.Sprintf("%s/responses", s.c.BaseURL.String())
 		data, err := json.Marshal(params)
 		if err != nil {
@@ -65,15 +65,16 @@ func (s *ResponsesService) stream(ctx context.Context, params *responsesParams) 
 
 		ln := internal.NewSSE(rawResp.Body, oai.NextFunc, oai.ScanFunc)
 		for ln.Next() {
-			var event, data string
-			ln.Scan(&event, &data)
+			var event string
+			var ev responsesStreamEvent
+			ln.Scan(&event, &ev)
+			if !yield(&ev, nil) {
+				return
+			}
 		}
 
 		if ln.Err() != nil {
 			yield(nil, ln.Err())
-			return
-		}
-		if !yield(nil, nil) {
 			return
 		}
 	}

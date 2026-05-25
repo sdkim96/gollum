@@ -8,11 +8,11 @@ import (
 )
 
 type Creator interface {
-	Create(ctx context.Context, params *ChatParams) (*ChatResponse, error)
+	Create(ctx context.Context, p *ChatParams) (*ChatResponse, error)
 }
 
 type Streamer interface {
-	Stream(ctx context.Context, params *ChatParams) iter.Seq2[*ChatResponse, error]
+	Stream(ctx context.Context, p *ChatParams) iter.Seq2[*ChatResponse, error]
 }
 
 func Create(ctx context.Context, c Creator, p *ChatParams) (*ChatResponse, error) {

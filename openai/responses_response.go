@@ -78,8 +78,63 @@ type responsesOutputTokenDetails struct {
 }
 
 type responsesError struct {
+	Type    string `json:"type,omitempty"` // "server_error" etc.
 	Code    string `json:"code"`
 	Message string `json:"message"`
 	Param   string `json:"param,omitempty"`
+}
+
+// SSE streaming event types.
+// Each event's data is JSON with a "type" field matching these constants.
+const (
+	eventResponseCreated    = "response.created"
+	eventResponseInProgress = "response.in_progress"
+	eventResponseCompleted  = "response.completed"
+	eventResponseIncomplete = "response.incomplete"
+	eventResponseFailed     = "response.failed"
+
+	eventOutputItemAdded = "response.output_item.added"
+	eventOutputItemDone  = "response.output_item.done"
+
+	eventContentPartAdded = "response.content_part.added"
+	eventContentPartDone  = "response.content_part.done"
+
+	eventOutputTextDelta      = "response.output_text.delta"
+	eventOutputTextDone       = "response.output_text.done"
+	eventOutputTextAnnotation = "response.output_text.annotation.added"
+
+	eventRefusalDelta = "response.refusal.delta"
+	eventRefusalDone  = "response.refusal.done"
+
+	eventFunctionCallArgsDelta = "response.function_call_arguments.delta"
+	eventFunctionCallArgsDone  = "response.function_call_arguments.done"
+
+	eventReasoningSummaryPartAdded = "response.reasoning_summary_part.added"
+	eventReasoningSummaryPartDone  = "response.reasoning_summary_part.done"
+	eventReasoningSummaryTextDelta = "response.reasoning_summary_text.delta"
+	eventReasoningSummaryTextDone  = "response.reasoning_summary_text.done"
+
+	eventError = "error"
+)
+
+// responsesStreamEvent is a minimal envelope for parsing the "type" field
+// from SSE data payloads. Additional fields are parsed per event type.
+type responsesStreamEvent struct {
+	Type string `json:"type"`
+
+	// response.output_text.delta
+	Delta string `json:"delta,omitempty"`
+
+	// response.function_call_arguments.delta
+	Arguments string `json:"arguments,omitempty"`
+
+	// response.output_item.added / done
+	Item *responsesOutputItem `json:"item,omitempty"`
+
+	// response.completed / created / failed
+	Response *responsesResponse `json:"response,omitempty"`
+
+	// error
+	Error *responsesError `json:"error,omitempty"`
 }
 

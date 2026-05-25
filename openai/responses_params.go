@@ -18,6 +18,8 @@ type responsesParams struct {
 	ToolChoice        *responsesToolChoiceSpecific `json:"tool_choice,omitempty"`
 	ParallelToolCalls *bool                        `json:"parallel_tool_calls,omitempty"`
 
+	Reasoning *responsesReasoning `json:"reasoning,omitempty"`
+
 	Stream bool `json:"stream,omitempty"`
 }
 
@@ -62,4 +64,10 @@ type responsesTool struct {
 type responsesToolChoiceSpecific struct {
 	Type string `json:"type"` // "function"
 	Name string `json:"name"`
+}
+
+// responsesReasoning configures reasoning/thinking for capable models.
+type responsesReasoning struct {
+	Effort  *string `json:"effort,omitempty"`  // "low" | "medium" | "high"
+	Summary *string `json:"summary,omitempty"` // "auto" | "concise" | "detailed" | "none"
 }
